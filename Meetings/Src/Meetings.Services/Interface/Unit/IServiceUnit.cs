@@ -8,13 +8,6 @@ namespace Meetings.Services.Interface.Unit
         IAllService All { get; }
         IByIdService ById { get; }
 
-        IOperatorService Operator { get; }
-        ISchoolService School { get; }
-        IClassOfSchoolService ClassOfSchool { get; }
-        IGradeService Grade { get; }
-        ISchoolGradeService SchoolGrade { get; }
-        ISubjectService Subject { get; }
-        ISubjectClassService SubjectClass { get; }
         IUserEventService UserEvent { get; }
         ICalenderEventService Event { get; }
 

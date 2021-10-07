@@ -7,6 +7,7 @@ using Meetings.Common.Helper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Meetings.API.Controllers
 {
@@ -73,6 +74,8 @@ namespace Meetings.API.Controllers
                         Id = i++
                     });
                 }
+
+                res.Data = res.Data.OrderBy(o => o.GradeName).ToList();
                 return Ok(res);
             }
             catch (Exception ex)

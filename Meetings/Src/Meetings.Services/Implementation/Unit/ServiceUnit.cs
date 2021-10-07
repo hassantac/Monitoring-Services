@@ -13,13 +13,6 @@ namespace Meetings.Services.Implementation.Unit
         private IUserService _user;
         private IAllService _all;
         private IByIdService _byId;
-        private IOperatorService _operator;
-        private ISchoolService _school;
-        private IClassOfSchoolService _classOfSchool;
-        private IGradeService _grade;
-        private ISchoolGradeService _schoolGrade;
-        private ISubjectService _subject;
-        private ISubjectClassService _subjectClass;
         private IUserEventService _userEvent;
         private ICalenderEventService _calenderEvent;
         #endregion
@@ -48,27 +41,6 @@ namespace Meetings.Services.Implementation.Unit
 
         public IByIdService ById =>
             _byId ??= new ByIdService(_repo);
-
-        public IOperatorService Operator =>
-            _operator ??= new OperatorService(_repo);
-
-        public ISchoolService School =>
-             _school ??= new SchoolService(_repo);
-
-        public IClassOfSchoolService ClassOfSchool =>
-             _classOfSchool ??= new ClassOfSchoolService(_repo);
-
-        public IGradeService Grade =>
-             _grade ??= new GradeService(_repo);
-
-        public ISchoolGradeService SchoolGrade =>
-             _schoolGrade ??= new SchoolGradeService(_repo);
-
-        public ISubjectService Subject =>
-             _subject ??= new SubjectService(_repo);
-
-        public ISubjectClassService SubjectClass =>
-             _subjectClass ??= new SubjectClassService(_repo);
 
         public IUserEventService UserEvent =>
             _userEvent ??= new UserEventService(_repo);

@@ -100,6 +100,21 @@ namespace Meetings.Client.Implementation
             return JsonSerializer.Deserialize<List<SubjectResponse>>(response);
         }
 
+        public ClassSmallResponse GetClasses(string nick_name)
+        {
+            var nick = new NicknameRequest()
+            {
+                Nickname = nick_name
+            };
+
+            var formObject = JsonSerializer.Serialize(nick);
+
+            var baseURL = AppSettingHelper.GetAdminURL();
+            var response = HttpCaller.PostString($"{baseURL}/v1/class_of_school/nick_name", formObject);
+
+            return JsonSerializer.Deserialize<ClassSmallResponse>(response);
+        }
+
         #endregion
     }
 }

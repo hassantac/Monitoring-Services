@@ -35,40 +35,6 @@ namespace Meetings.Services.Implementation.GetServices
         {
             return _repo.User.FindByCondition(f => !f.IsDeleted);
         }
-        public IQueryable<ClassOfSchool> GetClassesOfSchool()
-        {
-            return _repo.ClassOfSchool.FindByCondition(f => !f.IsDeleted);
-        }
-
-        public IQueryable<Grade> GetGrades()
-        {
-            return _repo.Grade.FindByCondition(f => !f.IsDeleted);
-        }
-
-        public IQueryable<Operator> GetOperators()
-        {
-            return _repo.Operator.FindByCondition(f => !f.IsDeleted);
-        }
-
-        public IQueryable<SchoolGrade> GetSchoolGrades()
-        {
-            return _repo.SchoolGrade.FindAll();
-        }
-
-        public IQueryable<School> GetSchools()
-        {
-            return _repo.School.FindByCondition(f => !f.IsDeleted);
-        }
-
-        public IQueryable<SubjectClass> GetSubjectClasses()
-        {
-            return _repo.SubjectClass.FindAll();
-        }
-
-        public IQueryable<Subject> GetSubjects()
-        {
-            return _repo.Subject.FindByCondition(f => !f.IsDeleted);
-        }
         public IQueryable<UserEvent> GetUserEvents()
         {
             return _repo.UserEvent.FindAll();

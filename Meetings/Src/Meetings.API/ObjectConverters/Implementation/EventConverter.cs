@@ -56,10 +56,10 @@ namespace Meetings.API.ObjectConverters.Implementation
                 Id = e.Id
             };
 
+            var uaeTime = DateTime.UtcNow;
+            var timeRemains = e.Start - uaeTime;
 
-            var timeRemains = res.Start - DateTime.UtcNow.AddHours(AppSettingHelper.GetUtcDifference());
-
-            if (timeRemains.Minutes >= 15 && timeRemains.Minutes < 0)
+            if (timeRemains.TotalMinutes >= -15 && timeRemains.TotalMinutes <= 15)
                 res.WebLink = e.WebLink;
 
             return res;

@@ -2,6 +2,13 @@
 
 namespace Meetings.Client.Models
 {
+    public class ClassesList
+    {
+        public string NickName { get; set; }
+        public string ExtendedClass { get; set; }
+        public string ExtendedSchool { get; set; }
+        public string ExtendedGrade { get; set; }
+    }
     public class ExtendedEvent
     {
         public string Subject { get; set; }

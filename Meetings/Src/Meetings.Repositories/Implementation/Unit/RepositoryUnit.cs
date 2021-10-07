@@ -11,13 +11,6 @@ namespace Meetings.Repositories.Implementation.Unit
         #region Private Fields
         private readonly MeetingsContext _db;
         private IUserRepository _user;
-        private IOperatorRepository _operator;
-        private ISchoolRepository _school;
-        private IClassOfSchoolRepository _classOfSchool;
-        private IGradeRepository _grade;
-        private ISchoolGradeRepository _schoolGrade;
-        private ISubjectRepository _subject;
-        private ISubjectClassRepository _subjectClass;
         private IUserEventRepository _userEvent;
         private ICalenderEventRepository _calenderEvent;
         #endregion
@@ -40,27 +33,6 @@ namespace Meetings.Repositories.Implementation.Unit
         #region Fields
         public IUserRepository User =>
             _user ??= new UserRepository(_db);
-
-        public IOperatorRepository Operator =>
-            _operator ??= new OperatorRepository(_db);
-
-        public ISchoolRepository School =>
-             _school ??= new SchoolRepository(_db);
-
-        public IClassOfSchoolRepository ClassOfSchool =>
-             _classOfSchool ??= new ClassOfSchoolRepository(_db);
-
-        public IGradeRepository Grade =>
-             _grade ??= new GradeRepository(_db);
-
-        public ISchoolGradeRepository SchoolGrade =>
-             _schoolGrade ??= new SchoolGradeRepository(_db);
-
-        public ISubjectRepository Subject =>
-             _subject ??= new SubjectRepository(_db);
-
-        public ISubjectClassRepository SubjectClass =>
-             _subjectClass ??= new SubjectClassRepository(_db);
 
         public ICalenderEventRepository CalenderEvent =>
             _calenderEvent ??= new CalenderEventRepository(_db);

@@ -184,9 +184,9 @@ namespace Meetings.API.Controllers
                 if (period.HasValue)
                 {
                     var start = DateTime.UtcNow.AddMinutes(-15);
-                    var endOfWeekUtc = start;
 
-                    endOfWeekUtc = period == CalendarPeriod.Daily ? start.AddHours(12) : start.AddDays(numDays);
+                    var endOfWeekUtc = start;
+                    endOfWeekUtc = period == CalendarPeriod.Daily ? new DateTime(start.Year, start.Month, start.Day, 23, 59, 59) : start.AddDays(numDays);
 
                     userEvents = userEvents.Where(w => w.Start >= start && w.End <= endOfWeekUtc);
                 }

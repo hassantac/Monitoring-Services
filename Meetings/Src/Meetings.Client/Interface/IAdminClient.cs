@@ -10,6 +10,8 @@ namespace Meetings.Client.Interface
         List<SchoolResponse> GetSchools(int? form);
         List<string> GetGrades(int? operator_id, string school);
         List<ClassOfSchoolResponse> GetClasses(int? operator_id, string school, string grade);
+        ClassSmallResponse GetClasses(string nick_name);
         List<SubjectResponse> GetSubjects(int? operator_id, string school, string grade);
+
     }
 }

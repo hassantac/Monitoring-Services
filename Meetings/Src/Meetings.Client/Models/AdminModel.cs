@@ -3,6 +3,11 @@
 namespace Meetings.Client.Models
 {
     #region Request
+    public class NicknameRequest
+    {
+        public string Nickname { get; set; }
+    }
+
     public class GetSchoolModel
     {
         public int? Operator_Id { get; set; }
@@ -42,6 +47,17 @@ namespace Meetings.Client.Models
 
         [JsonPropertyName("ClassName")]
         public string ClassName { get; set; }
+    }
+
+
+    public class ClassSmallResponse
+    {
+        [JsonPropertyName("ClassName")]
+        public string ClassName { get; set; }
+        [JsonPropertyName("School")]
+        public string School { get; set; }
+        [JsonPropertyName("Grade")]
+        public string Grade { get; set; }
     }
 
     public class SchoolResponse

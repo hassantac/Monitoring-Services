@@ -27,13 +27,6 @@ namespace Meetings.EF
         #region DbSets
 
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Grade> Grades { get; set; }
-        public virtual DbSet<Operator> Operators { get; set; }
-        public virtual DbSet<School> Schools { get; set; }
-        public virtual DbSet<ClassOfSchool> ClassesOfSchool { get; set; }
-        public virtual DbSet<SubjectClass> SubjectClasses { get; set; }
-        public virtual DbSet<Subject> Subjects { get; set; }
-        public virtual DbSet<SchoolGrade> SchoolGrades { get; set; }
         public virtual DbSet<UserEvent> UserEvents { get; set; }
         public virtual DbSet<CalenderEvent> CalenderEvents { get; set; }
 
@@ -56,13 +49,6 @@ namespace Meetings.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new GradeConfiguration());
-            modelBuilder.ApplyConfiguration(new OperatorConfiguration());
-            modelBuilder.ApplyConfiguration(new SchoolConfiguration());
-            modelBuilder.ApplyConfiguration(new ClassOfSchoolConfiguration());
-            modelBuilder.ApplyConfiguration(new SubjectClassConfiguration());
-            modelBuilder.ApplyConfiguration(new SubjectConfiguration());
-            modelBuilder.ApplyConfiguration(new SchoolGradeConfiguration());
             modelBuilder.ApplyConfiguration(new UserEventConfiguration());
             modelBuilder.ApplyConfiguration(new CalenderEventConfiguration());
         }

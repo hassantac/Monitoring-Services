@@ -16,6 +16,7 @@ namespace Meetings.Client.Implementation
     {
         #region Private Fields
         private GraphServiceClient graphClient;
+       // private List<ClassesList> listOfClasses;
         private readonly IServiceUnit _service;
         #endregion
 
@@ -45,26 +46,26 @@ namespace Meetings.Client.Implementation
                 {
                     if (data[0].Length > 5)
                     {
-                        var nickname = data[0];
-                        var classOfSchool = _service.All.GetClassesOfSchool().FirstOrDefault(w => w.MailNickName.Equals(nickname));
-                        if (classOfSchool != null)
+                        var className = new AdminClient().GetClasses(data[0]);
+                        //if (className == null)
+                        //{
+                        //    var classSmall = ;
+                        //    if (classSmall != null)
+                        //    {
+                        //        listOfClasses.Add(new ClassesList()
+                        //        {
+                        //            ExtendedClass = classSmall.ClassName,
+                        //            ExtendedGrade = classSmall.Grade,
+                        //            ExtendedSchool = className.ExtendedSchool,
+                        //            NickName = data[0]
+                        //        });
+                        //    }
+                        //}
+                        if (className != null)
                         {
-                            var schoolGrade = _service.ById.GetSchoolGrade(classOfSchool.SchoolGrade_Id);
-                            if (schoolGrade != null)
-                            {
-                                var school = _service.ById.GetSchool(schoolGrade.School_Id);
-                                if (school != null)
-                                {
-                                    School = school.Abbreviaton;
-                                }
-                                var grade = _service.ById.GetGrade(schoolGrade.Grade_Id);
-                                if (grade != null)
-                                {
-                                    Grade = grade.GradeName;
-                                }
-                            }
-
-                            Class = classOfSchool.SecondaryName;
+                            School = className.School;
+                            Grade = className.Grade;
+                            Class = className.ClassName;
                         }
                     }
                 }
@@ -127,6 +128,7 @@ namespace Meetings.Client.Implementation
         #region Constructor
         public GraphClient(IServiceUnit service)
         {
+            //listOfClasses = new List<ClassesList>();
             _service = service;
             School = Subject = Class = Grade = string.Empty;
             graphClient = CreateGraphHelper();
@@ -191,7 +193,6 @@ namespace Meetings.Client.Implementation
                     allEvents.Add(GetExtendedEvent(e));
                 }
             }
-
             return allEvents;
         }
 
@@ -217,6 +218,5 @@ namespace Meetings.Client.Implementation
             return user.Count == 0 ? throw new Exception(MessageHelper.NotFound("User Id")) : user[0].Id;
         }
         #endregion
-
     }
 }

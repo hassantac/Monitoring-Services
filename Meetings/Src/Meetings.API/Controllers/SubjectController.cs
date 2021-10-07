@@ -87,6 +87,31 @@ namespace Meetings.API.Controllers
                 });
             }
         }
+
+        [HttpGet("class")]
+        public ActionResult<ResponseWrapper<List<SubjectResponse>>> GetAll(string class_name)
+        {
+            try
+            {
+                var res = new ResponseWrapper<List<SubjectResponse>>()
+                {
+                    Message = MessageHelper.SuccessfullyGet,
+                    Success = true,
+                    Data = new List<SubjectResponse>()
+                };
+
+                return Ok(_client.Admin.GetClasses(class_name));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseWrapper<object>
+                {
+                    Data = null,
+                    Success = false,
+                    Message = ex.Message
+                });
+            }
+        }
         #endregion
 
         #region PUT

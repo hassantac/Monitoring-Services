@@ -40,41 +40,6 @@ namespace Meetings.Services.Implementation.GetServices
             return _all.GetUsers().Any(a => a.Id == id);
         }
 
-        public bool AnyClassOfSchool(long id)
-        {
-            return _all.GetClassesOfSchool().Any(a => a.Id == id);
-        }
-
-        public bool AnyGrade(long id)
-        {
-            return _all.GetGrades().Any(a => a.Id == id);
-        }
-
-        public bool AnyOperator(long id)
-        {
-            return _all.GetOperators().Any(a => a.Id == id);
-        }
-
-        public bool AnySchool(long id)
-        {
-            return _all.GetSchools().Any(a => a.Id == id);
-        }
-
-        public bool AnySchoolGrade(long id)
-        {
-            return _all.GetSchoolGrades().Any(a => a.Id == id);
-        }
-
-        public bool AnySubject(long id)
-        {
-            return _all.GetSubjects().Any(a => a.Id == id);
-        }
-
-        public bool AnySubjectClass(long id)
-        {
-            return _all.GetSubjectClasses().Any(a => a.Id == id);
-        }
-
         public bool AnyEvent(long id)
         {
             return _all.GetEvents().Any(a => a.Id == id);
@@ -88,41 +53,6 @@ namespace Meetings.Services.Implementation.GetServices
         public UserEvent GetUserEvent(long id)
         {
             return _all.GetUserEvents().FirstOrDefault(a => a.Id == id);
-        }
-
-        public ClassOfSchool GetClassOfSchool(long id)
-        {
-            return _all.GetClassesOfSchool().FirstOrDefault(a => a.Id == id);
-        }
-
-        public Grade GetGrade(long id)
-        {
-            return _all.GetGrades().FirstOrDefault(a => a.Id == id);
-        }
-
-        public Operator GetOperator(long id)
-        {
-            return _all.GetOperators().FirstOrDefault(a => a.Id == id);
-        }
-
-        public School GetSchool(long id)
-        {
-            return _all.GetSchools().FirstOrDefault(a => a.Id == id);
-        }
-
-        public SchoolGrade GetSchoolGrade(long id)
-        {
-            return _all.GetSchoolGrades().FirstOrDefault(a => a.Id == id);
-        }
-
-        public Subject GetSubject(long id)
-        {
-            return _all.GetSubjects().FirstOrDefault(a => a.Id == id);
-        }
-
-        public SubjectClass GetSubjectClass(long id)
-        {
-            return _all.GetSubjectClasses().FirstOrDefault(a => a.Id == id);
         }
 
         public User GetUser(long id)

@@ -57,16 +57,20 @@ namespace Meetings.API.Controllers
         {
             try
             {
+                var list = _client.Admin.GetSchools(operator_id).Select(s => new SchoolResponse()
+                {
+                    Abbreviaton = s.Abbreviation,
+                    Name = s.Name,
+                    Id = s.Id
+                }).ToList();
+
+
+
                 return Ok(new ResponseWrapper<List<SchoolResponse>>()
                 {
                     Message = MessageHelper.SuccessfullyGet,
                     Success = true,
-                    Data = _client.Admin.GetSchools(operator_id).Select(s => new SchoolResponse()
-                    {
-                        Abbreviaton = s.Abbreviation,
-                        Name = s.Name,
-                        Id = s.Id
-                    }).ToList()
+                    Data = list.OrderBy(o => o.Name).ToList()
                 });
             }
             catch (Exception ex)

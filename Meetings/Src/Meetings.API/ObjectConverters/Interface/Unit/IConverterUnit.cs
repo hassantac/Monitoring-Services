@@ -3,8 +3,6 @@
     public interface IConverterUnit
     {
         IUserConverter User { get; }
-        IClassOfSchoolConverter ClassOfSchool { get; }
-        ISchoolConverter School { get; }
         IEventConverter Event { get; }
     }
 }

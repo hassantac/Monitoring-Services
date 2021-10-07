@@ -10,8 +10,6 @@ namespace Meetings.API.ObjectConverters.Implementation.Unit
 
         #region Private Fields
         private IUserConverter _user;
-        private IClassOfSchoolConverter _classOfSchool;
-        private ISchoolConverter _school;
         private IEventConverter _event;
         private readonly IServiceUnit _service;
         private readonly IClientUnit _client;
@@ -36,11 +34,6 @@ namespace Meetings.API.ObjectConverters.Implementation.Unit
         #region Fields
         public IUserConverter User =>
             _user ??= new UserConverter(_service);
-        public IClassOfSchoolConverter ClassOfSchool =>
-            _classOfSchool ??= new ClassOfSchoolConverter(_service);
-
-        public ISchoolConverter School =>
-            _school ??= new SchoolConverter(_service);
 
         public IEventConverter Event =>
             _event ??= new EventConverter(_service, _client);

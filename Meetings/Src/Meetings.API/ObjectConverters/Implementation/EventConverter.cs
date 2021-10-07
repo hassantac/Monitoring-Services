@@ -47,7 +47,6 @@ namespace Meetings.API.ObjectConverters.Implementation
                 OrganizerName = e.OrganizerName,
                 Start = e.Start.AddHours(AppSettingHelper.GetUtcDifference()),
                 End = e.End.AddHours(AppSettingHelper.GetUtcDifference()),
-
                 BodyContent = e.BodyContent,
                 ExtendedClass = e.ExtendedClass,
                 ExtendedSubject = e.ExtendedSubject,
@@ -56,7 +55,11 @@ namespace Meetings.API.ObjectConverters.Implementation
                 EventId = e.EventId,
                 Id = e.Id
             };
-            if (e.Start >= DateTime.UtcNow.AddMinutes(-15))
+
+
+            var timeRemains = res.Start - DateTime.UtcNow.AddHours(AppSettingHelper.GetUtcDifference());
+
+            if (timeRemains.Minutes >= 15 && timeRemains.Minutes < 0)
                 res.WebLink = e.WebLink;
 
             return res;

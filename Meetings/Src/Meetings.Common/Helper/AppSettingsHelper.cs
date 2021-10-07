@@ -106,6 +106,8 @@ namespace Meetings.Common.Helper
 
         public static string UtcDifference = "Utc_difference";
 
+        public static string AdminURL = "Admin_URL";
+
 
 
         #endregion
@@ -129,7 +131,10 @@ namespace Meetings.Common.Helper
         {
             return bool.Parse(GetSettingValue(CustomSettings, EnableSignature));
         }
-
+        public static string GetAdminURL()
+        {
+            return GetSettingValue(AppConfigutions, AdminURL);
+        }
         public static string GetJwtTokenSecret()
         {
             return GetSettingValue(CustomSettings, JwtTokenSecret);

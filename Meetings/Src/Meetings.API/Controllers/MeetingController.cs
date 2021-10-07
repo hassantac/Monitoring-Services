@@ -183,8 +183,11 @@ namespace Meetings.API.Controllers
                 var userEvents = _service.All.GetEvents().OrderBy(o => o.Start).Where(w => w.UserEvents.Any(a => a.User_Id == token.Id));
                 if (period.HasValue)
                 {
-                    var start = DateTime.UtcNow.Date;
-                    var endOfWeekUtc = start.AddDays(numDays);
+                    var start = DateTime.UtcNow.AddMinutes(-15);
+                    var endOfWeekUtc = start;
+
+                    endOfWeekUtc = period == CalendarPeriod.Daily ? start.AddHours(12) : start.AddDays(numDays);
+
                     userEvents = userEvents.Where(w => w.Start >= start && w.End <= endOfWeekUtc);
                 }
 
@@ -196,7 +199,7 @@ namespace Meetings.API.Controllers
                 if (!string.IsNullOrWhiteSpace(class_of_school))
                     userEvents = userEvents.Where(e => e.ExtendedClass.Equals(class_of_school));
                 if (!string.IsNullOrWhiteSpace(grade))
-                    userEvents = userEvents.Where(e => e.ExtendedGrade.Equals(grade[0]));
+                    userEvents = userEvents.Where(e => e.ExtendedGrade.Equals(grade));
 
                 var total = 0;
                 if (page_index.HasValue && page_size.HasValue && page_size.Value > 0)

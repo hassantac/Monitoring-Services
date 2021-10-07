@@ -2,6 +2,7 @@
 using Meetings.API.Models;
 using Meetings.API.Models.Common;
 using Meetings.API.ObjectConverters.Interface.Unit;
+using Meetings.Client.Interface.Unit;
 using Meetings.Common.Enums;
 using Meetings.Common.Helper;
 using Meetings.Services.Interface.Unit;
@@ -18,8 +19,7 @@ namespace Meetings.API.Controllers
     public class SubjectController : ControllerBase
     {
         #region Private Fields
-        private readonly IServiceUnit _service;
-        private readonly IConverterUnit _converter;
+        private readonly IClientUnit _client;
         #endregion
 
 
@@ -29,10 +29,9 @@ namespace Meetings.API.Controllers
 
 
         #region Constructors
-        public SubjectController(IServiceUnit service, IConverterUnit converter)
+        public SubjectController(IClientUnit client)
         {
-            _service = service;
-            _converter = converter;
+            _client = client;
         }
         #endregion
 
@@ -52,74 +51,31 @@ namespace Meetings.API.Controllers
         #region End Points
 
         #region POST
-        [HttpPost]
-        [Route("")]
-        public ActionResult<ResponseWrapper<bool>> AddSubject(AddSubjectRequest model)
-        {
-            var token = _converter.User.GetAdminToken(HttpContext);
-            var admin = _service.ById.GetUser(token.Id);
-
-            try
-            {
-                var Subject = _service.Subject.AddSubject(model.Subject_Id, model.SubjectName);
-
-                var res = new ResponseWrapper<bool>()
-                {
-                    Message = MessageHelper.SuccessfullyAdded,
-                    Success = true,
-                    Data = true
-                };
-
-
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ResponseWrapper<object> { Data = null, Success = false, Message = ex.Message });
-            }
-        }
-
         #endregion
 
         #region GET
         [HttpGet("")]
-        public ActionResult<PagedResponse<List<SubjectResponse>>> GetAll(long? opertor_id, string school, string grade, string class_name, int? pageSize, int? pageIndex)
+        public ActionResult<ResponseWrapper<List<SubjectResponse>>> GetAll(int? opertor_id, string school, string grade, string class_name)
         {
             try
             {
-                var subjects = _service.All.GetSubjects();
-
-                if (opertor_id.HasValue)
-                    subjects = subjects.Where(w => w.SubjectClasses.Any(a => a.ClassOfSchool.SchoolGrade.School.Operator_Id == opertor_id.Value));
-
-
-                if (!string.IsNullOrWhiteSpace(school))
-                    subjects = subjects.Where(w => w.SubjectClasses.Any(a => a.ClassOfSchool.SchoolGrade.School.Abbreviaton.Equals(school)));
-
-                if (!string.IsNullOrWhiteSpace(grade))
-                    subjects = subjects.Where(w => w.SubjectClasses.Any(a => a.ClassOfSchool.SchoolGrade.Grade.Equals(grade)));
-
-                if (!string.IsNullOrWhiteSpace(class_name))
-                    subjects = subjects.Where(w => w.SubjectClasses.Any(a => a.ClassOfSchool.SecondaryName.Equals(class_name)));
-
-                var total = 0;
-                if (pageIndex.HasValue && pageSize.HasValue && pageSize.Value > 0)
-                {
-                    total = (int)Math.Ceiling(subjects.Count() / (double)pageSize.Value);
-                    subjects = subjects.Skip(pageIndex.Value * pageSize.Value).Take(pageSize.Value);
-                }
-                return Ok(new PagedResponse<List<SubjectResponse>>()
+                var res = new ResponseWrapper<List<SubjectResponse>>()
                 {
                     Message = MessageHelper.SuccessfullyGet,
                     Success = true,
-                    TotalPages = total,
-                    Data = subjects.Select(s => new SubjectResponse()
+                    Data = new List<SubjectResponse>()
+                };
+                var subjects = _client.Admin.GetSubjects(opertor_id, school, grade);
+                foreach (var item in subjects)
+                {
+                    res.Data.Add(new SubjectResponse()
                     {
-                        Id = s.Id,
-                        SubjectName = s.SubjectName,
-                        Subject_Id = s.Subject_Id
-                    }).ToList()
-                });
+                        Id = item.SubjectId,
+                        SubjectName = item.SubjectName
+                    });
+                }
+
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -135,49 +91,10 @@ namespace Meetings.API.Controllers
 
         #region PUT
 
-        [HttpPut]
-        [Route("{id}")]
-        public ActionResult<ResponseWrapper<bool>> EditSubject(long id, AddSubjectRequest model)
-        {
-            try
-            {
-                return Ok(new ResponseWrapper<bool>()
-                {
-                    Message = MessageHelper.SuccessfullyUpdated,
-                    Success = true,
-                    Data = _service.Subject.EditSubject(id, model.Subject_Id, model.SubjectName)
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ResponseWrapper<object> { Data = null, Success = false, Message = ex.Message });
-            }
-        }
         #endregion
 
         #region DELETE
-        [HttpDelete]
-        [Route("{id}")]
-        public ActionResult<ResponseWrapper<bool>> RemoveSubject(long id)
-        {
-            try
-            {
 
-                if (_service.All.GetSubjectClasses().Any(a => a.Subject_Id == id))
-                    throw new Exception("Classes exist against this Subject, cannot delete");
-
-                return Ok(new ResponseWrapper<bool>()
-                {
-                    Message = MessageHelper.SuccessfullyDeleted,
-                    Success = true,
-                    Data = _service.Subject.RemoveSubject(id)
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ResponseWrapper<object> { Data = null, Success = false, Message = ex.Message });
-            }
-        }
         #endregion
 
         #endregion

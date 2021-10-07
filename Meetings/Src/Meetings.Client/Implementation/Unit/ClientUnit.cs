@@ -8,6 +8,7 @@ namespace Meetings.Client.Implementation.Unit
     {
         #region Private Fields
         private IGraphClient _graph;
+        private IAdminClient _admin;
         private readonly IServiceUnit _service;
         #endregion
 
@@ -25,6 +26,9 @@ namespace Meetings.Client.Implementation.Unit
         #region Properties
         public IGraphClient Graph =>
             _graph ??= new GraphClient(_service);
+
+        public IAdminClient Admin =>
+            _admin ??= new AdminClient();
         #endregion
 
         #region Fields

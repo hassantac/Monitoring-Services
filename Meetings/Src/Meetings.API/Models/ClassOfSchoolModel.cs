@@ -20,12 +20,8 @@ namespace Meetings.API.Models
     {
         [JsonPropertyName("class_name")]
         public string ClassName { get; set; }
-        [JsonPropertyName("grade_id")]
-        public long Grade_Id { get; set; }
-        [JsonPropertyName("grade")]
-        public string Grade { get; set; }
         [JsonPropertyName("id")]
-        public long Id { get;  set; }
+        public long Id { get; set; }
     }
     #endregion
 

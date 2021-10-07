@@ -17,8 +17,6 @@ namespace Meetings.API.Models
     {
         [JsonPropertyName("id")]
         public long Id { get; set; }
-        [JsonPropertyName("grade_id")]
-        public long Grade_Id { get; set; }
         [JsonPropertyName("grade_name")]
         public string GradeName { get; set; }
     }

@@ -104,7 +104,12 @@ namespace Meetings.API
 
             app.UseAuthorization();
 
-            app.UseHangfireDashboard();
+            //app.UseHangfireDashboard();
+
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+                Authorization = new[] { new MyAuthorizationFilter() }
+            });
 
             app.UseEndpoints(endpoints =>
             {

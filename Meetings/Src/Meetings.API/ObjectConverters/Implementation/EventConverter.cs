@@ -91,7 +91,7 @@ namespace Meetings.API.ObjectConverters.Implementation
                 }
 
                 var start_of_week_utc = DateTime.UtcNow;
-                var endOfWeekUtc = start_of_week_utc.AddDays(7);
+                var endOfWeekUtc = start_of_week_utc.AddDays(1);
 
                 var events = _client.Graph.GetEventsAsync(user_id, start_of_week_utc, endOfWeekUtc, 100, "IsAllDay eq false and IsCancelled eq false").Result;
 

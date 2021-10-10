@@ -159,7 +159,7 @@ namespace Meetings.API.Controllers
 
         [HttpGet("")]
         [CheckJwt(Allows = new[] { AccountType.Admin })]
-        public ActionResult<List<CalenderEventResponse>> GetEvents(CalendarPeriod? period,
+        public ActionResult<List<CalenderEventResponse>> GetEvents(CalendarPeriod? period, int? operator_id,
                                                            string school, string grade, string subject,
                                                            string class_of_school, int? page_size,
                                                            int? page_index)
@@ -169,13 +169,12 @@ namespace Meetings.API.Controllers
 
             try
             {
-                int numDays = 0;
-                numDays = period switch
+                int numDays = period switch
                 {
                     CalendarPeriod.Daily => 1,
                     CalendarPeriod.Weekly => 7,
                     CalendarPeriod.Monthly => 30,
-                    CalendarPeriod.Period => 7,
+                    CalendarPeriod.Period => 1,
                     _ => 1,
                 };
 
@@ -186,9 +185,15 @@ namespace Meetings.API.Controllers
                     var start = DateTime.UtcNow.AddMinutes(-15);
 
                     var endOfWeekUtc = start;
-                    endOfWeekUtc = period == CalendarPeriod.Daily ? new DateTime(start.Year, start.Month, start.Day, 23, 59, 59) : start.AddDays(numDays);
+                    endOfWeekUtc = numDays == 1 ? new DateTime(start.Year, start.Month, start.Day, 23, 59, 59) : start.AddDays(numDays);
 
                     userEvents = userEvents.Where(w => w.Start >= start && w.End <= endOfWeekUtc);
+                }
+
+                if (operator_id.HasValue)
+                {
+                    var schools = _client.Admin.GetSchools(operator_id.Value).Select(s => s.Abbreviation).ToList();
+                    userEvents = userEvents.Where(w => schools.Contains(w.ExtendedSchool));
                 }
 
 

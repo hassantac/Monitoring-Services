@@ -2,7 +2,6 @@
 using Meetings.Client.Models;
 using Meetings.Common.Helper;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Text.Json;
 
 namespace Meetings.Client.Implementation
@@ -113,6 +112,14 @@ namespace Meetings.Client.Implementation
             var response = HttpCaller.PostString($"{baseURL}/v1/class_of_school/nick_name", formObject);
 
             return JsonSerializer.Deserialize<ClassSmallResponse>(response);
+        }
+
+        public List<string> GetSchoolsOfOperators(long operator_id)
+        {
+            var baseURL = AppSettingHelper.GetAdminURL();
+            var response = HttpCaller.GetRequest($"{baseURL}/v1/schools/{operator_id}");
+
+            return JsonSerializer.Deserialize<List<string>>(response);
         }
 
         #endregion

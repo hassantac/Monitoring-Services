@@ -65,6 +65,28 @@ namespace Meetings.Services.Implementation
                 _repo.CalenderEvent.Create(ev);
                 _repo.Save(ev);
             }
+            else
+            {
+                if (organizer_email.Contains("AFB"))
+                {
+                    int i = 0;
+                }
+                ev.BodyContent = body_content;
+                ev.End = end;
+                ev.ExtendedClass = extended_class;
+                ev.ExtendedGrade = extended_grade;
+                ev.ExtendedSchool = extended_school;
+                ev.ExtendedSubject = extended_subject;
+                ev.OrganizerEmail = organizer_email;
+                ev.OrganizerName = organizer_name;
+                ev.Start = start;
+                ev.Subject = subject;
+                ev.WebLink = web_link;
+
+                _repo.CalenderEvent.Update(ev);
+                _repo.Save(ev);
+
+            }
             return ev;
         }
         #endregion

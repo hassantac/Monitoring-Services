@@ -179,10 +179,10 @@ namespace Meetings.API.Controllers
                 };
 
 
-                var userEvents = _service.All.GetEvents().OrderBy(o => o.Start).Where(w => w.UserEvents.Any(a => a.User_Id == token.Id));
+                var userEvents = _service.All.GetEvents().OrderBy(o => o.Start).Where(w => w.UserEvents.Any(a => a.User_Id == token.Id) && w.OrganizerEmail.Contains("21-22"));
                 if (period.HasValue)
                 {
-                    var start = DateTime.UtcNow.AddMinutes(-15);
+                    var start = DateTime.UtcNow.AddHours(-AppSettingHelper.GetUtcDifference()).AddMinutes(-15);
 
                     var endOfWeekUtc = start;
                     endOfWeekUtc = numDays == 1 ? new DateTime(start.Year, start.Month, start.Day, 23, 59, 59) : start.AddDays(numDays);

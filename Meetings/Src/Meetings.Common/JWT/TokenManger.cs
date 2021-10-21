@@ -72,7 +72,7 @@ namespace Meetings.Common.JWT
                 }),
 
                 IssuedAt = DateTime.UtcNow,
-                Expires = DateTime.UtcNow.AddDays(30),
+                Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature, SecurityAlgorithms.Sha256Digest)
             };
 

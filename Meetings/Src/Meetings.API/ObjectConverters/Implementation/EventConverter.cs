@@ -56,7 +56,7 @@ namespace Meetings.API.ObjectConverters.Implementation
                 Id = e.Id
             };
 
-            var uaeTime = DateTime.UtcNow;
+            var uaeTime = DateTime.UtcNow.AddHours(-AppSettingHelper.GetUtcDifference());
             var timeRemains = e.Start - uaeTime;
 
             if (timeRemains.TotalMinutes >= -15 && timeRemains.TotalMinutes <= 15)

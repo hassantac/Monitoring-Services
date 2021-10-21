@@ -95,7 +95,7 @@ namespace Meetings.API.Filters
                     return;
                 }
 
-                var date = DateTime.Now;
+                var date = DateTime.UtcNow;
 
                 if (token.ExpiresAt < date)
                 {

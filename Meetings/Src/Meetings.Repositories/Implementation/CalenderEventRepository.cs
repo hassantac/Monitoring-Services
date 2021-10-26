@@ -9,7 +9,6 @@ namespace Meetings.Repositories.Implementation
     {
         public CalenderEventRepository(MeetingsContext db) : base(db)
         {
-
         }
     }
 }

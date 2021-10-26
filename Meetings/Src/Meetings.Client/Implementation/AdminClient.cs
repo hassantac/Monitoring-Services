@@ -8,28 +8,8 @@ namespace Meetings.Client.Implementation
 {
     internal class AdminClient : IAdminClient
     {
-
-        #region Private Fields
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
-
-        #region Constructor
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Fields
-
-        #endregion
-
         #region Methods
+
         public List<OperatorResponse> GetOperators()
         {
             var baseURL = AppSettingHelper.GetAdminURL();
@@ -49,7 +29,6 @@ namespace Meetings.Client.Implementation
             var response = HttpCaller.PostString($"{baseURL}/v1/school", formObject);
 
             return JsonSerializer.Deserialize<List<SchoolResponse>>(response);
-
         }
 
         public List<string> GetGrades(int? operator_id, string school)
@@ -83,6 +62,12 @@ namespace Meetings.Client.Implementation
             return JsonSerializer.Deserialize<List<ClassOfSchoolResponse>>(response);
         }
 
+        public string GetSubjectName(int id)
+        {
+            var baseURL = AppSettingHelper.GetAdminURL();
+            return HttpCaller.GetRequest($"{baseURL}/v1/subject/{id}");
+        }
+
         public List<SubjectResponse> GetSubjects(int? operator_id, string school, string grade)
         {
             var gradeQuery = new ClassOfSchoolQueryModel()
@@ -99,14 +84,15 @@ namespace Meetings.Client.Implementation
             return JsonSerializer.Deserialize<List<SubjectResponse>>(response);
         }
 
-        public ClassSmallResponse GetClasses(string nick_name)
+        public ClassSmallResponse GetClasses((string address, string name) p)
         {
-            var nick = new NicknameRequest()
+            var model = new NicknameRequest()
             {
-                Nickname = nick_name
+                Name = p.name,
+                Email = p.address
             };
 
-            var formObject = JsonSerializer.Serialize(nick);
+            var formObject = JsonSerializer.Serialize(model);
 
             var baseURL = AppSettingHelper.GetAdminURL();
             var response = HttpCaller.PostString($"{baseURL}/v1/class_of_school/nick_name", formObject);
@@ -122,6 +108,6 @@ namespace Meetings.Client.Implementation
             return JsonSerializer.Deserialize<List<string>>(response);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

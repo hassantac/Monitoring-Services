@@ -11,34 +11,26 @@ namespace Meetings.API.ObjectConverters.Implementation
     internal class UserConverter : IUserConverter
     {
         #region Private Fields
+
         private readonly IServiceUnit _service;
-        #endregion
 
+        #endregion Private Fields
 
-        #region Private Methods
-
-        #endregion
 
 
         #region Constructors
+
         public UserConverter(IServiceUnit service)
         {
             _service = service;
         }
-        #endregion
 
+        #endregion Constructors
 
-        #region Properties
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
 
 
         #region Methods
+
         public TokenModel GetAdminToken(HttpContext context)
         {
             var request = context.Request;
@@ -63,6 +55,7 @@ namespace Meetings.API.ObjectConverters.Implementation
             };
             return res;
         }
-        #endregion
+
+        #endregion Methods
     }
 }

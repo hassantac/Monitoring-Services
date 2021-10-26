@@ -2,26 +2,6 @@
 {
     public static class MessageHelper
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
-
-
         #region Fields
 
         public const string UserNotFound = "User not found";
@@ -90,8 +70,7 @@
 
         public const string TypeAlreadyExist = "Type already exist";
 
-        #endregion
-
+        #endregion Fields
 
         #region Methods
 
@@ -150,6 +129,6 @@
             return $"{value} not found.";
         }
 
-        #endregion
+        #endregion Methods
     }
 }

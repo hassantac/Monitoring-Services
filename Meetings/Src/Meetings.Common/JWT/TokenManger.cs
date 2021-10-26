@@ -15,8 +15,7 @@ namespace Meetings.Common.JWT
 
         private static readonly string Secret = AppSettingHelper.GetJwtTokenSecret();
 
-        #endregion
-
+        #endregion Private Fields
 
         #region Private Methods
 
@@ -38,26 +37,11 @@ namespace Meetings.Common.JWT
                 parameters, out _);
         }
 
-        #endregion
+        #endregion Private Methods
 
-
-        #region Constructors
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
 
 
         #region Methods
-
 
         public static string GenerateToken(long id, AccountType type)
         {
@@ -113,6 +97,6 @@ namespace Meetings.Common.JWT
             }
         }
 
-        #endregion
+        #endregion Methods
     }
 }

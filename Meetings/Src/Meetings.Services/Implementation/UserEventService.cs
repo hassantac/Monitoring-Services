@@ -12,33 +12,30 @@ namespace Meetings.Services.Implementation
     internal class UserEventService : IUserEventService
     {
         #region Private Fields
+
         private readonly IRepositoryUnit _repo;
         private readonly IAllService _all;
         private readonly IByIdService _byId;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public UserEventService(IRepositoryUnit repo)
         {
             _repo = repo;
             _all = new AllService(_repo);
             _byId = new ByIdService(_repo);
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
 
-        #region Fields
-
-        #endregion
 
         #region Methods
+
         public bool AddUserEvent(long event_id, long user_id)
         {
             if (!_byId.AnyEvent(event_id))
@@ -68,14 +65,12 @@ namespace Meetings.Services.Implementation
             if (UserEvent == null)
                 throw new Exception(MessageHelper.NotFound("User Event"));
 
-
             _repo.UserEvent.Delete(UserEvent);
             _repo.Save(UserEvent);
 
             return true;
         }
-        #endregion
+
+        #endregion Methods
     }
-
-
 }

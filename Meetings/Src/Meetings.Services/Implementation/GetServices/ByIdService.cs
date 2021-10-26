@@ -8,33 +8,28 @@ namespace Meetings.Services.Implementation.GetServices
     internal class ByIdService : IByIdService
     {
         #region Private Fields
+
         private readonly IRepositoryUnit _repo;
         private readonly IAllService _all;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public ByIdService(IRepositoryUnit repo)
         {
             _repo = repo;
             _all = new AllService(_repo);
         }
 
+        #endregion Constructor
 
-        #endregion
 
-        #region Properties
-
-        #endregion
-
-        #region Fields
-
-        #endregion
 
         #region Methods
+
         public bool AnyUser(long id)
         {
             return _all.GetUsers().Any(a => a.Id == id);
@@ -59,6 +54,7 @@ namespace Meetings.Services.Implementation.GetServices
         {
             return _all.GetUsers().FirstOrDefault(a => a.Id == id);
         }
-        #endregion
+
+        #endregion Methods
     }
 }

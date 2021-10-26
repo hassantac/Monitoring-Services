@@ -10,36 +10,18 @@ namespace Meetings.API.Attributes
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class CheckJwtAttribute : Attribute, IFilterFactory
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
-
-
         #region Properties
 
         public AccountType[] Allows { get; set; }
 
         public bool IsReusable => false;
 
-        #endregion
+        #endregion Properties
 
-
-        #region Fields
-
-        #endregion
 
 
         #region Methods
+
         public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
         {
             try
@@ -60,6 +42,6 @@ namespace Meetings.API.Attributes
             }
         }
 
-        #endregion
+        #endregion Methods
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Meetings.API.Utils.KeysAndValues;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using System;
 using System.Diagnostics;
@@ -7,40 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using UAParser;
-using Meetings.API.Utils.KeysAndValues;
 
 namespace Meetings.API.Utils.Request
 {
     internal static class RequestHelper
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
-
-
         #region Methods
-
-        
 
         public static RequestClientModel GetRequestClientModel(HttpContext context)
         {
@@ -109,7 +82,6 @@ namespace Meetings.API.Utils.Request
         //        string httpVerb = request.Method.ToString();
         //        model.HttpVerb = httpVerb;
 
-
         //        HttpHeaderValueCollection<ProductInfoHeaderValue> userAgentHeader = request.Headers.UserAgent;
 
         //        // Browser
@@ -147,7 +119,6 @@ namespace Meetings.API.Utils.Request
         //                        model.PortalId = portalId;
         //                    }
 
-
         //                }
         //            }
         //        }
@@ -160,7 +131,6 @@ namespace Meetings.API.Utils.Request
 
         //        // Request Body
         //        model.RequestBody = request.Content.ReadAsStringAsync().Result;
-
 
         //        // Is Mobile Device
         //        model.IsMobileDevice = IsMobileDevice(request);
@@ -176,14 +146,11 @@ namespace Meetings.API.Utils.Request
 
         //public static RequestClientModel RequestClientDetails()
         //{
-
         //    try
         //    {
         //        RequestClientModel model = new RequestClientModel();
 
-
         //        var context = HttpContext.;
-
 
         //        // Http Verb
         //        string httpVerb = context.Request.HttpMethod;
@@ -202,8 +169,6 @@ namespace Meetings.API.Utils.Request
         //            model.BrowserVersion = browser.Version;
         //            model.BrowserPlatform = browser.Platform;
         //        }
-
-
 
         //        // Portal Id
         //        model.PortalId = GetPortalValue();
@@ -231,8 +196,6 @@ namespace Meetings.API.Utils.Request
         //        {
         //            Debug.WriteLine(ex.Message);
         //        }
-
-
 
         //        // Token
         //        model.Token = GetAuthToken();
@@ -497,7 +460,6 @@ namespace Meetings.API.Utils.Request
             }
         }
 
-        #endregion
-
+        #endregion Methods
     }
 }

@@ -7,7 +7,6 @@ namespace Meetings.Repositories.Base
 {
     public interface IRepositoryBase<TEntity>
     {
-
         IQueryable<TEntity> FindAll();
 
         Task<IQueryable<TEntity>> FindAllAsync();
@@ -23,7 +22,9 @@ namespace Meetings.Repositories.Base
         void Create(TEntity entity);
 
         void Update(TEntity entity);
+
         void Detached(TEntity entity);
+
         void Delete(TEntity entity);
     }
 }

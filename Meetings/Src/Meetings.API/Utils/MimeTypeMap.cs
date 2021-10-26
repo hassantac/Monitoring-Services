@@ -698,8 +698,7 @@ namespace Meetings.API.Utils
                 {"video/x-ms-asf", ".asf"},
                 {"x-world/x-vrml", ".xof"},
 
-                #endregion
-
+                #endregion List of mime types
                 };
 
             var cache = mappings.ToList(); // need ToList() to avoid modifying while still enumerating

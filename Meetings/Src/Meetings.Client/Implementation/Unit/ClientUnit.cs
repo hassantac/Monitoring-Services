@@ -7,36 +7,32 @@ namespace Meetings.Client.Implementation.Unit
     internal class ClientUnit : IClientUnit
     {
         #region Private Fields
+
         private IGraphClient _graph;
         private IAdminClient _admin;
         private readonly IServiceUnit _service;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public ClientUnit(IServiceUnit service)
         {
             _service = service;
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Properties
+
         public IGraphClient Graph =>
             _graph ??= new GraphClient(_service);
 
         public IAdminClient Admin =>
             _admin ??= new AdminClient();
-        #endregion
 
-        #region Fields
-
-        #endregion
-
-        #region Methods
-
-        #endregion
+        #endregion Properties
     }
 }

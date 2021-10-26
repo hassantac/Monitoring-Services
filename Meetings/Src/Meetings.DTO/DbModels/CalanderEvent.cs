@@ -9,6 +9,7 @@ namespace Meetings.DTO.DbModels
         {
             UserEvents = new HashSet<UserEvent>();
         }
+
         public long Id { get; set; }
         public string Subject { get; set; }
         public string OrganizerEmail { get; set; }
@@ -23,6 +24,5 @@ namespace Meetings.DTO.DbModels
         public string EventId { get; set; }
         public string BodyContent { get; set; }
         public virtual ICollection<UserEvent> UserEvents { get; set; }
-
     }
 }

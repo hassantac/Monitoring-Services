@@ -5,12 +5,10 @@ using Meetings.Repositories.Interface;
 
 namespace Meetings.Repositories.Implementation
 {
-
     internal class UserRepository : RepositoryBase<User>, IUserRepository
     {
         public UserRepository(MeetingsContext db) : base(db)
         {
-
         }
     }
 }

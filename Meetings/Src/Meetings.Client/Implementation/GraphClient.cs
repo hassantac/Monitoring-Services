@@ -15,12 +15,16 @@ namespace Meetings.Client.Implementation
     internal class GraphClient : IGraphClient
     {
         #region Private Fields
+
         private GraphServiceClient graphClient;
-       // private List<ClassesList> listOfClasses;
+
+        // private List<ClassesList> listOfClasses;
         private readonly IServiceUnit _service;
-        #endregion
+
+        #endregion Private Fields
 
         #region Private Methods
+
         private GraphServiceClient CreateGraphHelper()
         {
             var clientId = AppSettingHelper.GetClientId();
@@ -36,50 +40,27 @@ namespace Meetings.Client.Implementation
             var authProvider = new ClientCredentialProvider(confidentialClientApplication);
             return new GraphServiceClient(authProvider);
         }
-        private void DecomposeOrganizer(string name)
+
+        private void DecomposeOrganizer(EmailAddress name)
         {
             Class = Grade = School = string.Empty;
-            if (!string.IsNullOrWhiteSpace(name))
+            if (name != null)
             {
-                var data = name.Split('@');
-                if (data.Length >= 2)
+                var className = new AdminClient().GetClasses((name.Address, name.Name));
+                if (className != null)
                 {
-                    if (data[0].Length > 5)
-                    {
-                        var className = new AdminClient().GetClasses(data[0]);
-                        //if (className == null)
-                        //{
-                        //    var classSmall = ;
-                        //    if (classSmall != null)
-                        //    {
-                        //        listOfClasses.Add(new ClassesList()
-                        //        {
-                        //            ExtendedClass = classSmall.ClassName,
-                        //            ExtendedGrade = classSmall.Grade,
-                        //            ExtendedSchool = className.ExtendedSchool,
-                        //            NickName = data[0]
-                        //        });
-                        //    }
-                        //}
-                        if (className != null)
-                        {
-                            School = className.School;
-                            Grade = className.Grade;
-                            Class = className.ClassName;
-                        }
-                    }
+                    School = className.School;
+                    Grade = className.Grade;
+                    Class = className.ClassName;
                 }
             }
         }
 
         private void DecomposeSubject(string eSubject)
         {
-            int strIndex, strSecondIndex;
             try
             {
-                strIndex = eSubject.IndexOf('-');
-                strSecondIndex = eSubject.IndexOf('-', strIndex + 1);
-                Subject = eSubject.Substring(strIndex + 1, strSecondIndex - strIndex - 1);
+                Subject = new AdminClient().GetSubjectName(int.Parse(eSubject.Split('-').First()));
             }
             catch (Exception)
             {
@@ -115,7 +96,7 @@ namespace Meetings.Client.Implementation
                 graphClient, events,
                 (e) =>
                 {
-                    DecomposeOrganizer(e.Organizer?.EmailAddress?.Address);
+                    DecomposeOrganizer(e.Organizer?.EmailAddress);
                     DecomposeSubject(e.Subject);
                     allEvents.Add(GetExtendedEvent(e));
                     return true;
@@ -123,9 +104,11 @@ namespace Meetings.Client.Implementation
             );
             await pageIterator.IterateAsync();
         }
-        #endregion
+
+        #endregion Private Methods
 
         #region Constructor
+
         public GraphClient(IServiceUnit service)
         {
             //listOfClasses = new List<ClassesList>();
@@ -133,20 +116,22 @@ namespace Meetings.Client.Implementation
             School = Subject = Class = Grade = string.Empty;
             graphClient = CreateGraphHelper();
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Properties
+
         public string School { get; set; }
         public string Subject { get; set; }
         public string Class { get; set; }
         public string Grade { get; set; }
-        #endregion
 
-        #region Fields
+        #endregion Properties
 
-        #endregion
+
 
         #region Methods
+
         public async Task<List<ExtendedEvent>> GetEventsAsync(string user_id, DateTime start, DateTime end, int max_events, string filter)
         {
             var allEvents = new List<ExtendedEvent>();
@@ -179,7 +164,7 @@ namespace Meetings.Client.Implementation
             {
                 foreach (var e in events)
                 {
-                    DecomposeOrganizer(e.Organizer?.EmailAddress?.Address);
+                    DecomposeOrganizer(e.Organizer?.EmailAddress);
                     DecomposeSubject(e.Subject);
                     allEvents.Add(GetExtendedEvent(e));
                 }
@@ -189,14 +174,12 @@ namespace Meetings.Client.Implementation
             {
                 foreach (var e in events)
                 {
-                    DecomposeOrganizer(e.Organizer?.EmailAddress?.Address);
+                    DecomposeOrganizer(e.Organizer?.EmailAddress);
                     allEvents.Add(GetExtendedEvent(e));
                 }
             }
             return allEvents;
         }
-
-
 
         public string GetUserId(string client_principal)
         {
@@ -214,9 +197,9 @@ namespace Meetings.Client.Implementation
               })
               .GetAsync().Result;
 
-
             return user.Count == 0 ? throw new Exception(MessageHelper.NotFound("User Id")) : user[0].Id;
         }
-        #endregion
+
+        #endregion Methods
     }
 }

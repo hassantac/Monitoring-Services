@@ -9,12 +9,8 @@ namespace Meetings.Common.Helper
 {
     public static class FileHelper
     {
-        #region Private Fields
-
-        #endregion
-
-
         #region Private Methods
+
         private static void SaveJpeg(string path, Drawing.Image img, int quality)
         {
             if (quality < 0 || quality > 100)
@@ -28,6 +24,7 @@ namespace Meetings.Common.Helper
             encoderParams.Param[0] = qualityParam;
             img.Save(path, jpegCodec, encoderParams);
         }
+
         private static ImageCodecInfo GetEncoderInfo(string mimeType)
         {
             // Get image codecs for all image formats
@@ -41,7 +38,6 @@ namespace Meetings.Common.Helper
             return null;
         }
 
-
         private static bool AddFile(string fileContent, string path)
         {
             byte[] byt = Convert.FromBase64String(fileContent);
@@ -54,7 +50,6 @@ namespace Meetings.Common.Helper
             {
                 if (size > 300)
                 {
-
                     using var ms = new MemoryStream(byt);
                     var img = Drawing.Image.FromStream(ms);
                     SaveJpeg(path, img, 50);
@@ -73,22 +68,9 @@ namespace Meetings.Common.Helper
         {
             return Guid.NewGuid().ToString() + "." + extension;
         }
-        #endregion
 
+        #endregion Private Methods
 
-        #region Constructors
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
 
 
         #region Methods
@@ -118,7 +100,6 @@ namespace Meetings.Common.Helper
             };
         }
 
-
         public static string UploadFiles(string content, string extension, FileLinkType type)
         {
             var fileName = GetFileName(extension);
@@ -132,11 +113,8 @@ namespace Meetings.Common.Helper
             return fileName;
         }
 
-
-
         public static async Task<bool> AddFileAsync(string fileContent, string path)
         {
-
             byte[] byt = Convert.FromBase64String(fileContent);
 
             await File.WriteAllBytesAsync(path, byt);
@@ -158,9 +136,6 @@ namespace Meetings.Common.Helper
             return true;
         }
 
-
-
-
         public static bool IsValidImage(byte[] bytes)
         {
             try
@@ -175,9 +150,6 @@ namespace Meetings.Common.Helper
             return true;
         }
 
-
-
-
-        #endregion
+        #endregion Methods
     }
 }

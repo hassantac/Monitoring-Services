@@ -10,6 +10,7 @@ namespace Meetings.DTO.DbModels
         {
             UserEvents = new HashSet<UserEvent>();
         }
+
         public string Username { get; set; }
         public string User_Id { get; set; }
         public string Password { get; set; }
@@ -17,8 +18,5 @@ namespace Meetings.DTO.DbModels
         public string Name { get; set; }
         public AccountType AccountType { get; set; }
         public virtual ICollection<UserEvent> UserEvents { get; set; }
-
     }
-
-
 }

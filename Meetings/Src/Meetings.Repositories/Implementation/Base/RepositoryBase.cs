@@ -2,26 +2,14 @@
 using Meetings.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Meetings.Repositories.Implementation.Base
 {
     internal class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
         #region Constructors
 
         public RepositoryBase(MeetingsContext repositoryContext)
@@ -29,19 +17,14 @@ namespace Meetings.Repositories.Implementation.Base
             RepositoryContext = repositoryContext;
         }
 
-        #endregion
-
+        #endregion Constructors
 
         #region Properties
 
         protected MeetingsContext RepositoryContext { get; set; }
 
-        #endregion
+        #endregion Properties
 
-
-        #region Fields
-
-        #endregion
 
 
         #region Methods
@@ -96,6 +79,6 @@ namespace Meetings.Repositories.Implementation.Base
             this.RepositoryContext.Set<TEntity>().Remove(entity);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

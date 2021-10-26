@@ -6,10 +6,12 @@ using System.Text.Json.Serialization;
 namespace Meetings.API.Models
 {
     #region Request
+
     public class AddSchoolRequest
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
         [JsonPropertyName("code")]
         public string Code { get; set; }
 
@@ -43,25 +45,23 @@ namespace Meetings.API.Models
         [JsonPropertyName("grades")]
         [Required(ErrorMessage = "Grades are required")]
         public List<long> Grades { get; set; }
-
     }
 
-    #endregion
+    #endregion Request
 
     #region Response
+
     public class SchoolResponse
     {
         [JsonPropertyName("id")]
         public long Id { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
         [JsonPropertyName("abbreviaton")]
         public string Abbreviaton { get; set; }
-
     }
-    #endregion
 
-    #region Query
-
-    #endregion
+    #endregion Response
 }

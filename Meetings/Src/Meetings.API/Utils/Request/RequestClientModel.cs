@@ -2,21 +2,6 @@
 {
     internal class RequestClientModel
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
-
-
         #region Properties
 
         /// <summary>
@@ -145,7 +130,6 @@
         /// </summary>
         public string PortalKey { get; set; }
 
-
         /// <summary>
         /// Index: 18
         /// Type: Client Request Model
@@ -174,19 +158,6 @@
         /// </summary>
         public string TraceIdentifier { get; set; }
 
-
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
-
-
-        #region Methods
-
-        #endregion
-
+        #endregion Properties
     }
 }

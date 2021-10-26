@@ -8,33 +8,31 @@ namespace Meetings.Services.Implementation.GetServices
     internal class AllService : IAllService
     {
         #region Private Fields
+
         private readonly IRepositoryUnit _repo;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public AllService(IRepositoryUnit repo)
         {
             _repo = repo;
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
 
-        #region Fields
-
-        #endregion
 
         #region Methods
+
         public IQueryable<User> GetUsers()
         {
             return _repo.User.FindByCondition(f => !f.IsDeleted);
         }
+
         public IQueryable<UserEvent> GetUserEvents()
         {
             return _repo.UserEvent.FindAll();
@@ -44,6 +42,7 @@ namespace Meetings.Services.Implementation.GetServices
         {
             return _repo.CalenderEvent.FindAll();
         }
-        #endregion
+
+        #endregion Methods
     }
 }

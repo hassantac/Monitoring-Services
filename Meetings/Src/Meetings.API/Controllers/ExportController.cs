@@ -4,6 +4,7 @@ using Meetings.API.Models.Common;
 using Meetings.API.ObjectConverters.Interface.Unit;
 using Meetings.API.Utils;
 using Meetings.API.Utils.Messages;
+using Meetings.Client.Interface.Unit;
 using Meetings.Common.Enums;
 using Meetings.Common.Helper;
 using Meetings.Services.Interface.Unit;
@@ -16,41 +17,36 @@ namespace Meetings.API.Controllers
 {
     [ApiController]
     [Route("v1/export")]
-   
     public class ExportController : ControllerBase
     {
         #region Private Fields
+
         private readonly IServiceUnit _service;
         private readonly IConverterUnit _converter;
-        #endregion
+        private readonly IClientUnit _client;
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
-        public ExportController(IConverterUnit converter, IServiceUnit service)
+
+        public ExportController(IClientUnit client, IConverterUnit converter, IServiceUnit service)
         {
+            _client = client;
             _service = service;
             _converter = converter;
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
 
-        #region Fields
-
-        #endregion
 
         #region Methods
 
         #region EndPoints
 
-        #region POST
 
-        #endregion
 
         #region GET
 
@@ -85,10 +81,11 @@ namespace Meetings.API.Controllers
             }
         }
 
-
         [HttpGet("")]
         [CheckJwt(Allows = new[] { AccountType.Admin })]
-        public ActionResult<ResponseWrapper<string>> Export()
+        public ActionResult<ResponseWrapper<string>> Export(CalendarPeriod? period, int? operator_id,
+                                                           string school, string grade, string subject,
+                                                           string class_of_school)
         {
             var token = _converter.User.GetAdminToken(HttpContext);
             var user = _service.ById.GetUser(token.Id);
@@ -96,6 +93,7 @@ namespace Meetings.API.Controllers
             {
                 using var workbook = new XLWorkbook();
                 IXLWorksheet worksheet = workbook.Worksheets.Add("Events");
+
                 worksheet.Cell(1, 1).Value = "Event Subject";
                 worksheet.Cell(1, 2).Value = "Start";
                 worksheet.Cell(1, 3).Value = "End";
@@ -106,9 +104,43 @@ namespace Meetings.API.Controllers
                 worksheet.Cell(1, 8).Value = "Class";
                 int index = 2;
 
+                int numDays = period switch
+                {
+                    CalendarPeriod.Daily => 1,
+                    CalendarPeriod.Weekly => 7,
+                    CalendarPeriod.Monthly => 30,
+                    CalendarPeriod.Period => 1,
+                    _ => 1,
+                };
+
+
                 var userEvents = _service.All.GetEvents().Where(w => w.UserEvents.Any(a => a.User_Id == token.Id));
 
 
+                if (period.HasValue)
+                {
+                    var start = DateTime.UtcNow.AddHours(-AppSettingHelper.GetUtcDifference()).AddMinutes(-15);
+
+                    var endOfWeekUtc = start;
+                    endOfWeekUtc = numDays == 1 ? new DateTime(start.Year, start.Month, start.Day, 23, 59, 59) : start.AddDays(numDays);
+
+                    userEvents = userEvents.Where(w => w.Start >= start && w.End <= endOfWeekUtc);
+                }
+
+                if (operator_id.HasValue)
+                {
+                    var schools = _client.Admin.GetSchools(operator_id.Value).Select(s => s.Abbreviation).ToList();
+                    userEvents = userEvents.Where(w => schools.Contains(w.ExtendedSchool));
+                }
+
+                if (!string.IsNullOrWhiteSpace(school))
+                    userEvents = userEvents.Where(e => e.ExtendedSchool.Equals(school));
+                if (!string.IsNullOrWhiteSpace(subject))
+                    userEvents = userEvents.Where(e => e.ExtendedSubject.Equals(subject));
+                if (!string.IsNullOrWhiteSpace(class_of_school))
+                    userEvents = userEvents.Where(e => e.ExtendedClass.Equals(class_of_school));
+                if (!string.IsNullOrWhiteSpace(grade))
+                    userEvents = userEvents.Where(e => e.ExtendedGrade.Equals(grade));
 
                 string fileName = Guid.NewGuid().ToString() + ".xlsx";
                 var filePath = AppSettingHelper.GetExcelFilePath();
@@ -142,18 +174,11 @@ namespace Meetings.API.Controllers
                 });
             }
         }
-        #endregion
 
-        #region PUT
+        #endregion GET
 
-        #endregion
+        #endregion EndPoints
 
-        #region DELETE
-
-        #endregion
-
-        #endregion
-
-        #endregion
+        #endregion Methods
     }
 }

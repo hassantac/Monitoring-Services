@@ -8,7 +8,6 @@ namespace Meetings.Client
 {
     public static class HttpCaller
     {
-
         public static readonly string HostName = "https://api.ebay.com/";
         public static string Token = "";
 
@@ -16,7 +15,6 @@ namespace Meetings.Client
         {
             try
             {
-
                 string rawJsonBody = JsonSerializer.Serialize(param);
 
                 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
@@ -53,12 +51,10 @@ namespace Meetings.Client
             }
         }
 
-
         public static string Get(string requestUrl)
         {
             try
             {
-
                 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
                 httpWebRequest.Method = "GET";
@@ -71,7 +67,6 @@ namespace Meetings.Client
                     string result = streamReader.ReadToEnd();
                     return result;
                 }
-
             }
             catch (WebException webEx)
             {
@@ -93,7 +88,6 @@ namespace Meetings.Client
         {
             try
             {
-
                 var rawJsonBody = JsonSerializer.Serialize(param);
 
                 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
@@ -138,7 +132,6 @@ namespace Meetings.Client
         {
             try
             {
-
                 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
                 httpWebRequest.Method = "DELETE";
@@ -151,7 +144,6 @@ namespace Meetings.Client
                     string result = streamReader.ReadToEnd();
                     return result;
                 }
-
             }
             catch (WebException webEx)
             {
@@ -168,7 +160,6 @@ namespace Meetings.Client
                 throw;
             }
         }
-
 
         public static string Get(string requestUrl, object param)
         {
@@ -232,6 +223,5 @@ namespace Meetings.Client
 
             return wc.DownloadString(requestUrl);
         }
-
     }
 }

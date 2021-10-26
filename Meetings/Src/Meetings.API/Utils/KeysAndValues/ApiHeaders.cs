@@ -2,7 +2,7 @@
 
 namespace Meetings.API.Utils.KeysAndValues
 {
-    public static  class ApiHeaders
+    public static class ApiHeaders
     {
         #region Private Fields
 
@@ -14,17 +14,8 @@ namespace Meetings.API.Utils.KeysAndValues
 
         private static List<string> _privateHeadersWithSignature;
 
-        #endregion
+        #endregion Private Fields
 
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
 
 
         #region Properties
@@ -42,7 +33,6 @@ namespace Meetings.API.Utils.KeysAndValues
                 return _publicHeaders;
             }
         }
-
 
         public static List<string> PpublicHeadersWithSignature
         {
@@ -94,8 +84,7 @@ namespace Meetings.API.Utils.KeysAndValues
             }
         }
 
-        #endregion
-
+        #endregion Properties
 
         #region Fields
 
@@ -139,11 +128,6 @@ namespace Meetings.API.Utils.KeysAndValues
         /// </summary>
         public static readonly string USER_AGENT = "User-Agent";
 
-        #endregion
-
-
-        #region Methods
-
-        #endregion
+        #endregion Fields
     }
 }

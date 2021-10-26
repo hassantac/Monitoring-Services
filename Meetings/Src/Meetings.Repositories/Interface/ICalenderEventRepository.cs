@@ -6,5 +6,4 @@ namespace Meetings.Repositories.Interface
     public interface ICalenderEventRepository : IRepositoryBase<CalenderEvent>
     {
     }
-
 }

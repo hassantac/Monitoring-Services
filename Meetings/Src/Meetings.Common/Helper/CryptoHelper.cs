@@ -7,31 +7,6 @@ namespace Meetings.Common.Helper
 {
     public static class CryptoHelper
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
-
-
         #region Methods
 
         public static string SymmetricEncryptString(string key, string plainText)
@@ -107,14 +82,12 @@ namespace Meetings.Common.Helper
             return BitConverter.ToString(hashMessage).Replace("-", "").ToLower();
         }
 
-
         public static string StringToBase(string value)
         {
             byte[] byt = Encoding.UTF8.GetBytes(value);
 
             return Convert.ToBase64String(byt);
         }
-
 
         public static string BaseToString(string value)
         {
@@ -123,7 +96,6 @@ namespace Meetings.Common.Helper
             return Encoding.UTF8.GetString(byt);
         }
 
-        #endregion
-
+        #endregion Methods
     }
 }

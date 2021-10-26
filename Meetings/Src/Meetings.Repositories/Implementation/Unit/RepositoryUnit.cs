@@ -7,30 +7,30 @@ namespace Meetings.Repositories.Implementation.Unit
 {
     internal class RepositoryUnit : IRepositoryUnit
     {
-
         #region Private Fields
+
         private readonly MeetingsContext _db;
         private IUserRepository _user;
         private IUserEventRepository _userEvent;
         private ICalenderEventRepository _calenderEvent;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public RepositoryUnit(MeetingsContext db)
         {
             _db = db;
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
+
 
         #region Fields
+
         public IUserRepository User =>
             _user ??= new UserRepository(_db);
 
@@ -39,9 +39,11 @@ namespace Meetings.Repositories.Implementation.Unit
 
         public IUserEventRepository UserEvent =>
             _userEvent ??= new UserEventRepository(_db);
-        #endregion
+
+        #endregion Fields
 
         #region Methods
+
         public void Save()
         {
             _db.SaveChanges();
@@ -68,7 +70,7 @@ namespace Meetings.Repositories.Implementation.Unit
         {
             _db.Database.RollbackTransaction();
         }
-        #endregion
 
+        #endregion Methods
     }
 }

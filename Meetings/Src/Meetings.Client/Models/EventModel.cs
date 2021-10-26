@@ -9,6 +9,7 @@ namespace Meetings.Client.Models
         public string ExtendedSchool { get; set; }
         public string ExtendedGrade { get; set; }
     }
+
     public class ExtendedEvent
     {
         public string Subject { get; set; }
@@ -22,7 +23,5 @@ namespace Meetings.Client.Models
         public string ExtendedGrade { get; set; }
         public string EventId { get; set; }
         public string BodyContent { get; set; }
-
-
     }
 }

@@ -5,31 +5,6 @@ namespace Meetings.API.Utils.Messages
 {
     internal static class ApiError
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
-
-
         #region Methods
 
         public static ErrorResponse InvalidRequest()
@@ -86,6 +61,6 @@ namespace Meetings.API.Utils.Messages
             return error;
         }
 
-        #endregion
+        #endregion Methods
     }
 }

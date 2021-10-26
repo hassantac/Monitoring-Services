@@ -13,16 +13,17 @@ namespace Meetings.Services.Implementation
     internal class UserService : IUserService
     {
         #region Private Fields
+
         private readonly IRepositoryUnit _repo;
         private readonly IAllService _all;
         private readonly IByIdService _byId;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public UserService(IRepositoryUnit repo)
         {
             _repo = repo;
@@ -30,18 +31,12 @@ namespace Meetings.Services.Implementation
             _byId = new ByIdService(_repo);
         }
 
+        #endregion Constructor
 
-        #endregion
 
-        #region Properties
-
-        #endregion
-
-        #region Fields
-
-        #endregion
 
         #region Methods
+
         public bool AddUser(string email, string username, string password, AccountType account, string name)
         {
             if (_all.GetUsers().Any(a => a.Username.Equals(username)))
@@ -75,6 +70,7 @@ namespace Meetings.Services.Implementation
 
             return true;
         }
-        #endregion
+
+        #endregion Methods
     }
 }

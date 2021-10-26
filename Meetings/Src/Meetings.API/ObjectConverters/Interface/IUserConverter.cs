@@ -8,6 +8,7 @@ namespace Meetings.API.ObjectConverters.Interface
     public interface IUserConverter
     {
         TokenModel GetAdminToken(HttpContext context);
+
         UserResponse GetUserResponse(User account);
     }
 }

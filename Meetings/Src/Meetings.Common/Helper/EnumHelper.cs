@@ -6,32 +6,6 @@ namespace Meetings.Common.Helper
 {
     public static class EnumHelper
     {
-
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
-
-
         #region Methods
 
         public static IEnumerable<T> GetValues<T>()
@@ -44,6 +18,6 @@ namespace Meetings.Common.Helper
             return (T)Enum.Parse(typeof(T), value);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

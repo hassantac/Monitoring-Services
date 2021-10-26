@@ -7,42 +7,37 @@ namespace Meetings.API.ObjectConverters.Implementation.Unit
 {
     public class ConverterUnit : IConverterUnit
     {
-
         #region Private Fields
+
         private IUserConverter _user;
         private IEventConverter _event;
         private readonly IServiceUnit _service;
         private readonly IClientUnit _client;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public ConverterUnit(IServiceUnit service, IClientUnit client)
         {
             _service = service;
             _client = client;
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
+
 
         #region Fields
+
         public IUserConverter User =>
             _user ??= new UserConverter(_service);
 
         public IEventConverter Event =>
             _event ??= new EventConverter(_service, _client);
 
-        #endregion
-
-        #region Methods
-
-        #endregion
-
+        #endregion Fields
     }
 }

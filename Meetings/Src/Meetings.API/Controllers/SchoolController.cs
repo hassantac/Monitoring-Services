@@ -1,17 +1,13 @@
 ﻿using Meetings.API.Attributes;
 using Meetings.API.Models;
 using Meetings.API.Models.Common;
-using Meetings.API.ObjectConverters.Interface.Unit;
 using Meetings.Client.Interface.Unit;
 using Meetings.Common.Enums;
 using Meetings.Common.Helper;
-using Meetings.Services.Interface.Unit;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Meetings.API.Controllers
 {
@@ -21,37 +17,32 @@ namespace Meetings.API.Controllers
     public class SchoolController : ControllerBase
     {
         #region Private Fields
+
         private readonly IClientUnit _client;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public SchoolController(IClientUnit client)
         {
             _client = client;
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
 
-        #region Fields
-
-        #endregion
 
         #region Methods
 
         #region EndPoints
 
-        #region POST
 
-        #endregion
 
         #region GET
+
         [HttpGet("")]
         public ActionResult<ResponseWrapper<List<SchoolResponse>>> GetAll(int? operator_id)
         {
@@ -63,8 +54,6 @@ namespace Meetings.API.Controllers
                     Name = s.Name,
                     Id = s.Id
                 }).ToList();
-
-
 
                 return Ok(new ResponseWrapper<List<SchoolResponse>>()
                 {
@@ -83,17 +72,11 @@ namespace Meetings.API.Controllers
                 });
             }
         }
-        #endregion
 
-        #region PUT
-        #endregion
+        #endregion GET
 
-        #region DELETE
+        #endregion EndPoints
 
-        #endregion
-
-        #endregion
-
-        #endregion
+        #endregion Methods
     }
 }

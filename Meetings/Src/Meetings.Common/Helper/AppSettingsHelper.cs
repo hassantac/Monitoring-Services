@@ -1,18 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Diagnostics;
-using System.Text;
 
 namespace Meetings.Common.Helper
 {
     public static class AppSettingHelper
     {
-        #region Private Fields
-
-        #endregion
-
-
         #region Private Methods
+
         private static string GetSettingValue(string parentKey, string childKey)
         {
             try
@@ -38,8 +33,6 @@ namespace Meetings.Common.Helper
             }
         }
 
-
-
         private static IConfigurationRoot GetSettingConfiguration()
         {
             try
@@ -55,17 +48,9 @@ namespace Meetings.Common.Helper
                 throw;
             }
         }
-        #endregion
 
+        #endregion Private Methods
 
-        #region Constructors
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
 
 
         #region Fields
@@ -108,20 +93,20 @@ namespace Meetings.Common.Helper
 
         public static string AdminURL = "Admin_URL";
 
-
-
-        #endregion
-
+        #endregion Fields
 
         #region Methods
+
         public static bool GetEnableSeeder()
         {
             return bool.Parse(GetSettingValue(CustomSettings, EnableSeeder));
         }
+
         public static string GetCron()
         {
             return GetSettingValue(AppConfigutions, Cron);
         }
+
         public static bool GetEnableSwagger()
         {
             return bool.Parse(GetSettingValue(CustomSettings, EnableSwagger));
@@ -131,10 +116,12 @@ namespace Meetings.Common.Helper
         {
             return bool.Parse(GetSettingValue(CustomSettings, EnableSignature));
         }
+
         public static string GetAdminURL()
         {
             return GetSettingValue(AppConfigutions, AdminURL);
         }
+
         public static string GetJwtTokenSecret()
         {
             return GetSettingValue(CustomSettings, JwtTokenSecret);
@@ -144,6 +131,7 @@ namespace Meetings.Common.Helper
         {
             return GetSettingValue(CustomSettings, JwtValueSecret);
         }
+
         public static string GetApiToken()
         {
             return GetSettingValue(CustomSettings, ApiToken);
@@ -158,14 +146,17 @@ namespace Meetings.Common.Helper
         {
             return GetSettingValue(CustomSettings, PasswordSecret);
         }
+
         public static string GetClientId()
         {
             return GetSettingValue(AppConfigutions, ClientId);
         }
+
         public static string GetClientSecret()
         {
             return GetSettingValue(AppConfigutions, ClientSecret);
         }
+
         public static string GetTenant()
         {
             return GetSettingValue(AppConfigutions, Tenant);
@@ -175,19 +166,22 @@ namespace Meetings.Common.Helper
         {
             return GetSettingValue("ConnectionStrings", "HangFireConnection");
         }
+
         public static string GetDefaultConnection()
         {
             return GetSettingValue("ConnectionStrings", "DefaultConnection");
         }
+
         public static string GetExcelFilePath()
         {
             return GetSettingValue(CustomSettings, ExcelFilePath);
         }
+
         public static int GetUtcDifference()
         {
             return int.Parse(GetSettingValue(CustomSettings, UtcDifference));
         }
 
-        #endregion
+        #endregion Methods
     }
 }

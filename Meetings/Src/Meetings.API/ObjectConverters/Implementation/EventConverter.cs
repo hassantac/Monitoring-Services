@@ -13,31 +13,28 @@ namespace Meetings.API.ObjectConverters.Implementation
     internal class EventConverter : IEventConverter
     {
         #region Private Fields
+
         private readonly IServiceUnit _service;
         private readonly IClientUnit _client;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public EventConverter(IServiceUnit service, IClientUnit client)
         {
             _service = service;
             _client = client;
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
 
-        #region Fields
-
-        #endregion
 
         #region Methods
+
         public CalenderEventResponse GetEventResponse(CalenderEvent e)
         {
             var res = new CalenderEventResponse
@@ -59,7 +56,10 @@ namespace Meetings.API.ObjectConverters.Implementation
             var uaeTime = DateTime.UtcNow.AddHours(-AppSettingHelper.GetUtcDifference());
             var timeRemains = e.Start - uaeTime;
 
-            if (timeRemains.TotalMinutes >= -15 && timeRemains.TotalMinutes <= 15)
+            var timeEnd = e.End - uaeTime;
+
+
+            if (timeRemains.TotalMinutes <= 15 && timeEnd.TotalMinutes > 0)
                 res.WebLink = e.WebLink;
 
             return res;
@@ -115,7 +115,6 @@ namespace Meetings.API.ObjectConverters.Implementation
                     }
                 }
 
-
                 foreach (var ev in events)
                 {
                     var eventObject = _service.Event.AddCalenderEvent(ev.Subject, ev.Organizer?.EmailAddress?.Address,
@@ -129,6 +128,7 @@ namespace Meetings.API.ObjectConverters.Implementation
                 }
             }
         }
-        #endregion
+
+        #endregion Methods
     }
 }

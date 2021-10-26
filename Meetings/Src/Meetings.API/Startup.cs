@@ -69,10 +69,8 @@ namespace Meetings.API
                 options.IncludeXmlComments(xmlDocFilePath);
             });
 
-
             services.AddHangfire(options => options.UseSqlServerStorage(AppSettingHelper.GetHangFireConnection()));
             services.AddHangfireServer();
-
 
             // Add Service
             services.AddService(Configuration);
@@ -126,11 +124,13 @@ namespace Meetings.API
                 });
             }
         }
+
         private void InitializeDatabase(IApplicationBuilder app)
         {
             using var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
             scope.ServiceProvider.GetRequiredService<MeetingsContext>().Database.Migrate();
         }
+
         private BadRequestObjectResult CustomErrorResponse(ActionContext action)
         {
             var res = new ResponseWrapper<object>

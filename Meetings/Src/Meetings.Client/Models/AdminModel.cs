@@ -3,26 +3,32 @@
 namespace Meetings.Client.Models
 {
     #region Request
+
     public class NicknameRequest
     {
-        public string Nickname { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
     }
 
     public class GetSchoolModel
     {
         public int? Operator_Id { get; set; }
     }
+
     public class GradeQueryModel : GetSchoolModel
     {
         public string School { get; set; }
     }
+
     public class ClassOfSchoolQueryModel : GradeQueryModel
     {
         public string Grade { get; set; }
     }
-    #endregion
+
+    #endregion Request
 
     #region Request
+
     public class OperatorResponse
     {
         [JsonPropertyName("Id")]
@@ -31,6 +37,7 @@ namespace Meetings.Client.Models
         [JsonPropertyName("Name")]
         public string Name { get; set; }
     }
+
     public class SubjectResponse
     {
         [JsonPropertyName("SubjectId")]
@@ -49,13 +56,14 @@ namespace Meetings.Client.Models
         public string ClassName { get; set; }
     }
 
-
     public class ClassSmallResponse
     {
         [JsonPropertyName("ClassName")]
         public string ClassName { get; set; }
+
         [JsonPropertyName("School")]
         public string School { get; set; }
+
         [JsonPropertyName("Grade")]
         public string Grade { get; set; }
     }
@@ -71,5 +79,6 @@ namespace Meetings.Client.Models
         [JsonPropertyName("Abbreviation")]
         public string Abbreviation { get; set; }
     }
-    #endregion
+
+    #endregion Request
 }

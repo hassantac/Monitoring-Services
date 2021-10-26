@@ -9,7 +9,6 @@ namespace Meetings.Repositories.Implementation
     {
         public UserEventRepository(MeetingsContext db) : base(db)
         {
-
         }
     }
 }

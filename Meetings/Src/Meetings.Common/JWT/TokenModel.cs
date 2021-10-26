@@ -5,11 +5,6 @@ namespace Meetings.Common.JWT
 {
     public class TokenModel
     {
-        #region Private Fields
-
-        #endregion
-
-
         #region Private Methods
 
         private DateTime FromUnixTime(long unixTime)
@@ -19,12 +14,13 @@ namespace Meetings.Common.JWT
             return epoch.AddSeconds(unixTime);
         }
 
-        #endregion
-
+        #endregion Private Methods
 
         #region Constructors
 
-        public TokenModel() { }
+        public TokenModel()
+        {
+        }
 
         public TokenModel(long id)
         {
@@ -44,8 +40,7 @@ namespace Meetings.Common.JWT
             Type = type;
         }
 
-        #endregion
-
+        #endregion Constructors
 
         #region Properties
 
@@ -65,16 +60,6 @@ namespace Meetings.Common.JWT
 
         public AccountType Type { get; set; }
 
-        #endregion
-
-
-        #region Fields
-
-        #endregion
-
-
-        #region Methods
-
-        #endregion
+        #endregion Properties
     }
 }

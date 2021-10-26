@@ -12,7 +12,9 @@ namespace Meetings.Services.Interface.Unit
         ICalenderEventService Event { get; }
 
         void BeginTransaction();
+
         void CommitTransaction();
+
         void RollBackTransaction();
     }
 }

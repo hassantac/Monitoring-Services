@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 namespace Meetings.API.Models.Common
 {
     #region Request
+
     public class LoginRequest
     {
         [JsonPropertyName("username")]
@@ -25,27 +26,19 @@ namespace Meetings.API.Models.Common
         [Required]
         public string Password { get; set; }
     }
-    #endregion
 
+    #endregion Request
 
     #region Response
+
     public class PagedResponse<TData> : ResponseWrapper<TData>
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
         #region Constructors
+
         public PagedResponse()
         {
-
         }
+
         public PagedResponse(TData data, int pageNumber, int pageSize)
         {
             PageNumber = pageNumber;
@@ -56,11 +49,10 @@ namespace Meetings.API.Models.Common
             Error = null;
         }
 
-
-        #endregion
-
+        #endregion Constructors
 
         #region Properties
+
         /// <summary>
         /// Index: 0
         /// Type: Response
@@ -92,35 +84,18 @@ namespace Meetings.API.Models.Common
         /// </summary>
         [JsonPropertyName("total_records")]
         public int TotalRecords { get; set; }
-        #endregion
 
-
-        #region Fields
-
-        #endregion
-
-
-        #region Methods
-
-        #endregion
+        #endregion Properties
     }
+
     public class PagedResponse<TData, F> : ResponseWrapper<TData>
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
         #region Constructors
+
         public PagedResponse()
         {
-
         }
+
         public PagedResponse(F Filter, TData data, int pageNumber, int pageSize)
         {
             PageNumber = pageNumber;
@@ -131,11 +106,10 @@ namespace Meetings.API.Models.Common
             Error = null;
         }
 
-
-        #endregion
-
+        #endregion Constructors
 
         #region Properties
+
         /// <summary>
         /// Index: 0
         /// Type: Response
@@ -168,40 +142,24 @@ namespace Meetings.API.Models.Common
         [JsonPropertyName("total_records")]
         public int TotalRecords { get; set; }
 
-
         /// <summary>
         /// Index: 4
         /// Type: Filter
-        /// Description: Filter 
+        /// Description: Filter
         /// </summary>
         [JsonPropertyName("filter")]
         public F Filter { get; set; }
-        #endregion
 
-
-        #region Fields
-
-        #endregion
-
-
-        #region Methods
-
-        #endregion
+        #endregion Properties
     }
+
     public class ErrorResponse
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
         #region Constructors
-        public ErrorResponse() { }
+
+        public ErrorResponse()
+        {
+        }
 
         public ErrorResponse(string message)
         {
@@ -221,8 +179,7 @@ namespace Meetings.API.Models.Common
             this.ErrorMessage = message;
         }
 
-        #endregion
-
+        #endregion Constructors
 
         #region Properties
 
@@ -242,14 +199,8 @@ namespace Meetings.API.Models.Common
         [JsonPropertyName("error_message")]
         public string ErrorMessage { get; set; }
 
-        #endregion
-
-
-        #region Methods
-
-        #endregion
+        #endregion Properties
     }
-
 
     public class LoginResponse<TData>
     {
@@ -263,22 +214,14 @@ namespace Meetings.API.Models.Common
 
         public string Role { get; set; }
     }
+
     public class ResponseWrapper<TData>
     {
-
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
         #region Constructors
 
-        public ResponseWrapper() { }
+        public ResponseWrapper()
+        {
+        }
 
         public ResponseWrapper(bool success, string message, ErrorResponse error, TData data)
         {
@@ -288,8 +231,7 @@ namespace Meetings.API.Models.Common
             this.Data = data;
         }
 
-        #endregion
-
+        #endregion Constructors
 
         #region Properties
 
@@ -325,27 +267,17 @@ namespace Meetings.API.Models.Common
         [JsonPropertyName("data")]
         public TData Data { get; set; }
 
-        #endregion
-
-
-        #region Methods
-
-        #endregion
-
+        #endregion Properties
     }
 
     public class IdAndName
     {
         [JsonPropertyName("id")]
         public long Id { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; }
     }
 
-    #endregion
-
-
-    #region Query
-
-    #endregion
+    #endregion Response
 }

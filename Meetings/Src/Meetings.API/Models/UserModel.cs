@@ -3,10 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace Meetings.API.Models
 {
-    #region Request
-
-    #endregion
-
     #region Response
 
     public class UserResponse
@@ -33,9 +29,5 @@ namespace Meetings.API.Models
         public string User_Id { get; set; }
     }
 
-    #endregion
-
-    #region Query
-
-    #endregion
+    #endregion Response
 }

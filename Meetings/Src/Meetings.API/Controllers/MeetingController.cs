@@ -20,43 +20,40 @@ namespace Meetings.API.Controllers
     public class MeetingController : ControllerBase
     {
         #region Private Fields
+
         private readonly IClientUnit _client;
         private readonly IServiceUnit _service;
         private readonly IConverterUnit _converter;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public MeetingController(IClientUnit client, IConverterUnit converter, IServiceUnit service)
         {
             _client = client;
             _service = service;
             _converter = converter;
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
 
-        #region Fields
-
-        #endregion
 
         #region Methods
 
         #region EndPoints
 
         #region POST
+
         [HttpPost("run_job")]
         public ActionResult<ResponseWrapper<bool>> RunJob()
         {
             try
             {
-                RecurringJob.AddOrUpdate("FetchEvents", () => _converter.Event.SyncEvents(), AppSettingHelper.GetCron());
+                RecurringJob.AddOrUpdate("FetchEvents", () => _converter.Event.SyncEvents(), Cron.Hourly);
                 return Ok(new ResponseWrapper<bool>()
                 {
                     Data = true,
@@ -74,7 +71,8 @@ namespace Meetings.API.Controllers
                 });
             }
         }
-        #endregion
+
+        #endregion POST
 
         #region GET
 
@@ -128,7 +126,6 @@ namespace Meetings.API.Controllers
                     }
                 }
 
-
                 foreach (var ev in events)
                 {
                     var eventObject = _service.Event.AddCalenderEvent(ev.Subject, ev.Organizer?.EmailAddress?.Address,
@@ -140,8 +137,6 @@ namespace Meetings.API.Controllers
 
                     _service.UserEvent.AddUserEvent(eventObject.Id, user.Id);
                 }
-
-
 
                 return Ok(new ResponseWrapper<bool> { Data = true, Message = MessageHelper.SuccessfullyGet, Success = true });
             }
@@ -155,7 +150,6 @@ namespace Meetings.API.Controllers
                 });
             }
         }
-
 
         [HttpGet("")]
         [CheckJwt(Allows = new[] { AccountType.Admin })]
@@ -178,7 +172,6 @@ namespace Meetings.API.Controllers
                     _ => 1,
                 };
 
-
                 var userEvents = _service.All.GetEvents().OrderBy(o => o.Start).Where(w => w.UserEvents.Any(a => a.User_Id == token.Id) && w.OrganizerEmail.Contains("21-22"));
                 if (period.HasValue)
                 {
@@ -196,7 +189,6 @@ namespace Meetings.API.Controllers
                     userEvents = userEvents.Where(w => schools.Contains(w.ExtendedSchool));
                 }
 
-
                 if (!string.IsNullOrWhiteSpace(school))
                     userEvents = userEvents.Where(e => e.ExtendedSchool.Equals(school));
                 if (!string.IsNullOrWhiteSpace(subject))
@@ -212,7 +204,6 @@ namespace Meetings.API.Controllers
                     total = (int)Math.Ceiling(userEvents.Count() / (double)page_size.Value);
                     userEvents = userEvents.Skip(page_index.Value * page_size.Value).Take(page_size.Value);
                 }
-
 
                 var res = new PagedResponse<List<CalenderEventResponse>>()
                 {
@@ -241,18 +232,11 @@ namespace Meetings.API.Controllers
                 });
             }
         }
-        #endregion
 
-        #region PUT
+        #endregion GET
 
-        #endregion
+        #endregion EndPoints
 
-        #region DELETE
-
-        #endregion
-
-        #endregion
-
-        #endregion
+        #endregion Methods
     }
 }

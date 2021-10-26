@@ -18,33 +18,24 @@ namespace Meetings.API.Controllers
     public class AuthController : ControllerBase
     {
         #region Private Fields
+
         private readonly IServiceUnit _service;
         private readonly IConverterUnit _converter;
-        #endregion
 
+        #endregion Private Fields
 
-        #region Private Methods
-
-        #endregion
 
 
         #region Constructors
+
         public AuthController(IServiceUnit service, IConverterUnit converter)
         {
             _service = service;
             _converter = converter;
         }
-        #endregion
 
+        #endregion Constructors
 
-        #region Properties
-
-        #endregion
-
-
-        #region Fields
-
-        #endregion
 
 
         #region Methods
@@ -52,6 +43,7 @@ namespace Meetings.API.Controllers
         #region End Points
 
         #region POST
+
         [HttpPost]
         [Route("login")]
         public ActionResult<ResponseWrapper<LoginResponse<UserResponse>>> Login(LoginRequest model)
@@ -64,7 +56,6 @@ namespace Meetings.API.Controllers
                 {
                     return Unauthorized(new ResponseWrapper<object>(false, MessageHelper.InvalidUsernameOrPassword, ApiError.InvalidRequest(), null));
                 }
-
 
                 var jwtToken = TokenManger.GenerateToken(account.Id, AccountType.Admin);
 
@@ -81,23 +72,22 @@ namespace Meetings.API.Controllers
                     Message = MessageHelper.SuccessfullyLogin,
                     Success = true,
                 });
-
-
             }
             catch (Exception ex)
             {
                 return BadRequest(new ResponseWrapper<object>(false, ex.Message, ApiError.InvalidRequest(), null));
             }
         }
-        #endregion
+
+        #endregion POST
 
         #region GET
+
         [HttpGet]
         [Route("current")]
         [CheckJwt(Allows = new[] { AccountType.Admin })]
         public ActionResult<ResponseWrapper<LoginResponse<object>>> GetCurrentUser()
         {
-
             try
             {
                 var token = _converter.User.GetAdminToken(HttpContext);
@@ -112,27 +102,17 @@ namespace Meetings.API.Controllers
                         User = _converter.User.GetUserResponse(user)
                     }
                 });
-
             }
             catch (Exception ex)
             {
                 return BadRequest(new ResponseWrapper<object>(false, ex.Message, ApiError.InvalidRequest(), null));
             }
         }
-        #endregion
 
-        #region PUT
+        #endregion GET
 
+        #endregion End Points
 
-        #endregion
-
-        #region DELETE
-
-        #endregion
-
-        #endregion
-
-        #endregion
-
+        #endregion Methods
     }
 }

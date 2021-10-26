@@ -15,17 +15,12 @@ namespace Meetings.API.Filters
 {
     public class CheckJwtFilter : IAuthorizationFilter
     {
-
         #region Private Fields
 
         private readonly IServiceUnit _service;
 
-        #endregion
+        #endregion Private Fields
 
-
-        #region Private Methods
-
-        #endregion
 
 
         #region Constructors
@@ -36,19 +31,14 @@ namespace Meetings.API.Filters
             Allows = new List<AccountType>();
         }
 
-        #endregion
-
+        #endregion Constructors
 
         #region Properties
 
         public List<AccountType> Allows { get; set; }
 
-        #endregion
+        #endregion Properties
 
-
-        #region Fields
-
-        #endregion
 
 
         #region Methods
@@ -131,6 +121,6 @@ namespace Meetings.API.Filters
             }
         }
 
-        #endregion
+        #endregion Methods
     }
 }

@@ -9,30 +9,31 @@ namespace Meetings.Services.Implementation.Unit
     internal class ServiceUnit : IServiceUnit
     {
         #region Private Fields
+
         private readonly IRepositoryUnit _repo;
         private IUserService _user;
         private IAllService _all;
         private IByIdService _byId;
         private IUserEventService _userEvent;
         private ICalenderEventService _calenderEvent;
-        #endregion
 
-        #region Private Methods
+        #endregion Private Fields
 
-        #endregion
+
 
         #region Constructor
+
         public ServiceUnit(IRepositoryUnit repo)
         {
             _repo = repo;
         }
-        #endregion
 
-        #region Properties
+        #endregion Constructor
 
-        #endregion
+
 
         #region Fields
+
         public IUserService User =>
             _user ??= new UserService(_repo);
 
@@ -47,9 +48,11 @@ namespace Meetings.Services.Implementation.Unit
 
         public ICalenderEventService Event =>
             _calenderEvent ??= new CalenderEventService(_repo);
-        #endregion
+
+        #endregion Fields
 
         #region Methods
+
         public void BeginTransaction()
         {
             _repo.BeginTransaction();
@@ -64,7 +67,7 @@ namespace Meetings.Services.Implementation.Unit
         {
             _repo.RollBackTransaction();
         }
-        #endregion
 
+        #endregion Methods
     }
 }

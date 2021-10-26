@@ -7,21 +7,6 @@ namespace Meetings.EF
 {
     public class MeetingsContext : DbContext
     {
-        #region Private Fields
-
-        #endregion
-
-
-        #region Private Methods
-
-        #endregion
-
-
-        #region Constructors
-
-        #endregion
-
-
         #region Properties
 
         #region DbSets
@@ -30,17 +15,14 @@ namespace Meetings.EF
         public virtual DbSet<UserEvent> UserEvents { get; set; }
         public virtual DbSet<CalenderEvent> CalenderEvents { get; set; }
 
-        #endregion
+        #endregion DbSets
 
-        #endregion
+        #endregion Properties
 
-
-        #region Fields
-
-        #endregion
 
 
         #region Methods
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(AppSettingHelper.GetDefaultConnection());
@@ -52,7 +34,7 @@ namespace Meetings.EF
             modelBuilder.ApplyConfiguration(new UserEventConfiguration());
             modelBuilder.ApplyConfiguration(new CalenderEventConfiguration());
         }
-        #endregion
 
+        #endregion Methods
     }
 }
